@@ -47,12 +47,13 @@ int main() {
   int sockfd, commfd;
   fd_set rset;
   for(i=0;i<5;i++) {
-    if(fork() == 0) {
+    if(fork() == 0) { // child process
       child_process();
       exit(0);
     }
   }
  
+  // parent process: server
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
   memset(&addr, 0, sizeof (addr));
   addr.sin_family = AF_INET;
@@ -76,6 +77,8 @@ int main() {
     }
  
     puts("round again");
+
+    // select will reset the rset bitmap
     select(max+1, &rset, NULL, NULL, NULL);
  
     for(i=0;i<5;i++) {

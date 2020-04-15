@@ -1,10 +1,12 @@
 #include <pthread.h> 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 // thread routine
 void *hello(void *vargp) {
-    printf("hello, world\n");
+    printf("hello, world...\n");
+    sleep(60);
     return NULL;
 }
 
